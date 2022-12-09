@@ -47,7 +47,7 @@ public class userInfoAdapter extends BaseAdapter {
             LayoutInflater inflater = (LayoutInflater) context.getSystemService(Context.LAYOUT_INFLATER_SERVICE);
             view = inflater.inflate(layout, null);
 
-            holder.tvUserInfo = (TextView) viewGroup.findViewById(R.id.tvUserInfo);
+            holder.tvUserInfo = (TextView) view.findViewById(R.id.tvUserInfo);
             view.setTag(holder);
         }else{
             holder = (viewHolder) view.getTag();

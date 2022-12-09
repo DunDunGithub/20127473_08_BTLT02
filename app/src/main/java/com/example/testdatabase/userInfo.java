@@ -6,7 +6,7 @@ public class userInfo {
     private String fullname;
     private String overview;
     private int totalTask;
-    private float totalTasks;
+    private int totalTasks;
     private int currentTasks;
     private int currentFinished;
 
@@ -22,7 +22,7 @@ public class userInfo {
         return totalTasks;
     }
 
-    public void setTotalTasks(float totalTasks) {
+    public void setTotalTasks(int totalTasks) {
         this.totalTasks = totalTasks;
     }
 
