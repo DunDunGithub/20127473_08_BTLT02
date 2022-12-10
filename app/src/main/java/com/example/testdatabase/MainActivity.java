@@ -2,10 +2,12 @@ package com.example.testdatabase;
 
 import androidx.appcompat.app.AppCompatActivity;
 
+import android.app.Dialog;
 import android.database.Cursor;
 import android.os.Bundle;
 import android.text.TextUtils;
 import android.view.View;
+import android.view.Window;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.ListView;
@@ -37,7 +39,7 @@ public class MainActivity extends AppCompatActivity {
             public void onClick(View view) {
                 String name = edtTen.getText().toString().trim();
                 if(TextUtils.isEmpty(name)){
-                    Toast.makeText(MainActivity.this, "Vui long nhap ten", Toast.LENGTH_SHORT).show();
+                    Toast.makeText(MainActivity.this, "Vui lòng nhập tên", Toast.LENGTH_SHORT).show();
                     return;
                 }
                 db.queryData("INSERT INTO UserInfo VALUES ('"+name+"', '123456', 'US2', 'DEF', 5, 24, 1, 4)");
@@ -67,7 +69,42 @@ public class MainActivity extends AppCompatActivity {
 
         //Get data
         getDataAction();
+    }
 
+    public void dialogUpdate(String pass, final String username){
+        Dialog dialog = new Dialog(this);
+        dialog.requestWindowFeature(Window.FEATURE_NO_TITLE);
+        dialog.setContentView(R.layout.dialog_sua);
+
+        EditText edtSua = (EditText) dialog.findViewById(R.id.edtSua);
+        Button btnSua = (Button) dialog.findViewById(R.id.btnSua);
+        Button btnHuy = (Button) dialog.findViewById(R.id.btnHuy);
+
+        edtSua.setText(pass);
+
+        btnHuy.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                dialog.dismiss();
+            }
+        });
+
+        btnSua.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                String newPass = edtSua.getText().toString().trim();
+                if(TextUtils.isEmpty(newPass)){
+                    Toast.makeText(MainActivity.this, "Vui lòng nhập mật khẩu mới", Toast.LENGTH_SHORT).show();
+                    dialog.dismiss();
+                    return;
+                }
+                db.queryData("UPDATE UserInfo SET pass = '"+newPass+"' WHERE username = '"+username+"'");
+                dialog.dismiss();
+                getDataAction();
+            }
+        });
+
+        dialog.show();
     }
 
     private void getDataAction() {

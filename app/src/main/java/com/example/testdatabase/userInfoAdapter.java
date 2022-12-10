@@ -12,11 +12,11 @@ import android.widget.Toast;
 import java.util.List;
 
 public class userInfoAdapter extends BaseAdapter {
-    private Context context;
+    private MainActivity context;
     private int layout;
     private List<userInfo> userList;
 
-    public userInfoAdapter(Context context, int layout, List<userInfo> userList){
+    public userInfoAdapter(MainActivity context, int layout, List<userInfo> userList){
         this.context = context;
         this.layout = layout;
         this.userList = userList;
@@ -64,7 +64,8 @@ public class userInfoAdapter extends BaseAdapter {
         holder.imgSua.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                Toast.makeText(context, "Sửa", Toast.LENGTH_SHORT).show();
+//                Toast.makeText(context, "Sửa", Toast.LENGTH_SHORT).show();
+                context.dialogUpdate(user.getPassword(), user.getUsername());
             }
         });
 
