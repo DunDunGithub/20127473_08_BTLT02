@@ -72,7 +72,8 @@ public class userInfoAdapter extends BaseAdapter {
         holder.imgXoa.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                Toast.makeText(context, "Xóa", Toast.LENGTH_SHORT).show();
+//                Toast.makeText(context, "Xóa", Toast.LENGTH_SHORT).show();
+                context.dialogDelete(user.getUsername());
             }
         });
 
