@@ -5,7 +5,9 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.BaseAdapter;
+import android.widget.ImageView;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import java.util.List;
 
@@ -37,6 +39,7 @@ public class userInfoAdapter extends BaseAdapter {
 
     private class viewHolder {
         TextView tvUserInfo;
+        ImageView imgSua, imgXoa;
     }
 
     @Override
@@ -48,13 +51,30 @@ public class userInfoAdapter extends BaseAdapter {
             view = inflater.inflate(layout, null);
 
             holder.tvUserInfo = (TextView) view.findViewById(R.id.tvUserInfo);
+            holder.imgSua = (ImageView) view.findViewById(R.id.change);
+            holder.imgXoa = (ImageView) view.findViewById(R.id.delete);
             view.setTag(holder);
         }else{
             holder = (viewHolder) view.getTag();
         }
 
-        userInfo user = userList.get(i);
+        final userInfo user = userList.get(i);
         holder.tvUserInfo.setText(user.getUsername());
+
+        holder.imgSua.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Toast.makeText(context, "Sửa", Toast.LENGTH_SHORT).show();
+            }
+        });
+
+        holder.imgXoa.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Toast.makeText(context, "Xóa", Toast.LENGTH_SHORT).show();
+            }
+        });
+
         return view;
     }
 }
