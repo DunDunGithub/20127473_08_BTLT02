@@ -23,13 +23,13 @@
             android:layout_weight="1"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
-            android:src="@drawable/ic_change"
+            android:src="@drawable/ic_action_change"
             android:id="@+id/change"/>
         <ImageView
             android:layout_weight="1"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
-            android:src="@drawable/ic_delete_main"
+            android:src="@drawable/ic_action_delete"
             android:id="@+id/delete"/>
 
 </LinearLayout>

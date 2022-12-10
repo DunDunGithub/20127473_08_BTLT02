@@ -13,19 +13,33 @@
         android:orientation="horizontal"
         android:weightSum="10">
         <EditText
-            android:layout_width="0dp"
+            android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_weight="8"
             android:hint="Nhập dữ liệu"
             android:textSize="20dp"
             android:textColor="#000"
             android:id="@+id/edtTen"/>
-        <Button
-            android:layout_width="0dp"
+        <RelativeLayout
+            android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_weight="2"
-            android:text="Thêm"
-            android:id="@+id/btnThem"/>
+            android:layout_weight="2">
+            <Button
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_weight="2"
+                android:text="Thêm"
+                android:id="@+id/btnThem"
+                android:visibility="invisible"/>
+
+            <ImageView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:src="@drawable/ic_action_search"
+                android:id="@+id/imgTimkiem"/>
+
+        </RelativeLayout>
+
     </LinearLayout>
     
 

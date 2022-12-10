@@ -12,6 +12,7 @@ import android.view.View;
 import android.view.Window;
 import android.widget.Button;
 import android.widget.EditText;
+import android.widget.ImageView;
 import android.widget.ListView;
 import android.widget.Toast;
 
@@ -24,6 +25,7 @@ public class MainActivity extends AppCompatActivity {
     userInfoAdapter adapter;
     EditText edtTen;
     Button btnThem;
+    ImageView imgSearch;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -32,6 +34,7 @@ public class MainActivity extends AppCompatActivity {
         lv = findViewById(R.id.lvNoiDung);
         edtTen = findViewById(R.id.edtTen);
         btnThem = findViewById(R.id.btnThem);
+        imgSearch = findViewById(R.id.imgTimkiem);
         userList = new ArrayList<>();
         adapter = new userInfoAdapter(this, R.layout.user_information, userList);
         lv.setAdapter(adapter);
@@ -46,6 +49,31 @@ public class MainActivity extends AppCompatActivity {
                 }
                 db.queryData("INSERT INTO UserInfo VALUES ('"+name+"', '123456', 'US2', 'DEF', 5, 24, 1, 4)");
                 getDataAction();
+            }
+        });
+
+        imgSearch.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                String content = edtTen.getText().toString().trim();
+                if(TextUtils.isEmpty(content)){
+                    Toast.makeText(MainActivity.this,"Vui lòng nhập tên", Toast.LENGTH_SHORT).show();
+                    return;
+                }
+                Cursor dataUserInfo = db.getData("SELECT * FROM UserInfo WHERE username LIKE '%"+content+"%'");
+                userList.clear();
+                while(dataUserInfo.moveToNext()){
+                    String username = dataUserInfo.getString(0);
+                    String pass = dataUserInfo.getString(1);
+                    String fullname = dataUserInfo.getString(2);
+                    String overview = dataUserInfo.getString(3);
+
+//            Toast.makeText(this, name, Toast.LENGTH_SHORT).show();
+                    userList.add(new userInfo(username, pass, fullname, overview));
+                }
+                adapter.notifyDataSetChanged();
+                adapter = new userInfoAdapter(MainActivity.this, R.layout.user_information, userList);
+                lv.setAdapter(adapter);
             }
         });
 
